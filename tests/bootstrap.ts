@@ -29,7 +29,7 @@ export async function initORMMongo() {
   const orm = await MikroORM.init<MongoDriver>({
     entitiesDirs: ['entities'],
     tsNode: false,
-    clientUrl: 'mongodb://localhost:27017,localhost:27018,localhost:27019/mikro-orm-test?replicaSet=rs0',
+    clientUrl: 'mongodb://localhost:30000,localhost:30001,localhost:30002/mikro-orm-test',
     baseDir: BASE_DIR,
     debug: true,
     highlight: false,

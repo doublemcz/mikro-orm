@@ -24,6 +24,34 @@ services:
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
 
+  mongo_1:
+    image: mongo:4.2.3
+    ports:
+      - 30000:27017
+    command: mongod --replSet rs0
+
+  mongo_2:
+    image: mongo:4.2.3
+    ports:
+      - 30001:27017
+    command: mongod --replSet rs0
+
+  mongo_3:
+    image: mongo:4.2.3
+    ports:
+      - 30002:27017
+    command: mongod --replSet rs0
+
+  init_mongo_rs:
+    image: mongo:4.2.3
+    depends_on:
+      - mongo_1
+      - mongo_2
+      - mongo_3
+    volumes:
+      - ./docker/mongo:/scripts
+    command: bash /scripts/init-mongo.sh
+
 volumes:
   mysql:
   postgre:
